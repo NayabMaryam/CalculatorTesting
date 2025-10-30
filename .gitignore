@@ -23,3 +23,16 @@
 hs_err_pid*
 replay_pid*
 /target/
+
+# Eclipse project files
+.classpath
+.project
+.settings/
+
+# Mac / Windows system files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+
