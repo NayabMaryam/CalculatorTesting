@@ -218,10 +218,22 @@ A bug report was created in **Jira Software** for an issue found in the Calculat
 
 ## 👥 Group Members
 
-| Name               |  GitHub Username |
-| -----------------  |  --------------- |
-| **Nayab Maryam**   |  `@NayabMaryam`  |
-| **Tooba Nadeem**   |  `@l232550`      |
+<p align="center">
+  <a href="https://github.com/l232550" target="_blank">
+    <img src="https://avatars.githubusercontent.com/l232550" width="80" height="80" style="border-radius: 50%;" alt="Tooba Nadeem" />
+  </a><br/>
+  <a href="https://github.com/l232550"><b>Tooba Nadeem</b></a><br/>
+  <sub>Student ID: L232550</sub>
+</p>
+
+<p align="center">
+  <a href="https://github.com/NayabMaryam" target="_blank">
+    <img src="https://avatars.githubusercontent.com/NayabMaryam" width="80" height="80" style="border-radius: 50%;" alt="Nayab Maryam" />
+  </a><br/>
+  <a href="https://github.com/NayabMaryam"><b>Nayab Maryam</b></a><br/>
+  <sub>Student ID: F233015</sub>
+</p>
+
 
 ---
 
