@@ -15,10 +15,10 @@ The purpose of this assignment is to design, implement, and execute automated te
 
 | Tool                  | Purpose                 |
 | --------------------- | ----------------------- |
-| Java 21               | Programming Language    |
+| Java 8                | Programming Language    |
 | JUnit 5               | Testing Framework       |
 | Maven                 | Build Automation        |
-| IntelliJ IDEA         | IDE                     |
+| Eclipse               | IDE                     |
 | Apache POI            | Excel File Handling     |
 | Maven Surefire Plugin | Parallel Test Execution |
 | GitHub                | Version Control         |
@@ -30,9 +30,9 @@ The purpose of this assignment is to design, implement, and execute automated te
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/alikhan/CalculatorTestAutomation.git
+   git clone https://github.com/NayabMaryam/CalculatorTestAutomation.git
    ```
-2. Open the project in **IntelliJ IDEA** or **Eclipse**.
+2. Open the project in **Eclipse**.
 3. Ensure Maven dependencies for JUnit 5 are added in `pom.xml`:
 
    ```xml
@@ -56,11 +56,11 @@ The purpose of this assignment is to design, implement, and execute automated te
 
 ### 🔹 Tested Classes
 
-| Class               | Description                                   | Responsible Member |
-| ------------------- | --------------------------------------------- | ------------------ |
-| CalculatorModel     | Core arithmetic operations                    | **Ali Khan**       |
-| CalculatorPresenter | Connects View and Model                       | **Ali Khan**       |
-| CalculatorView      | Handles user interaction (mocked for testing) | **Sara Ahmed**     |
+| Class               | Description                                   |
+| ------------------- | --------------------------------------------- |
+| CalculatorModel     | Core arithmetic operations                    |
+| CalculatorPresenter | Connects View and Model                       |
+| CalculatorView      | Handles user interaction (mocked for testing) |
 
 ---
 
@@ -181,8 +181,6 @@ public class FastTestsSuite {}
 | **Execution Type**       | Parallel (3 threads)                                 |
 | **Coverage Tool**        | JaCoCo                                               |
 | **Team Members**         | 2                                                    |
-| **Ali Khan**             | Model & Presenter tests, Setup                       |
-| **Sara Ahmed**           | View tests, Data-driven tests, Configurations        |
 | **Extras**               | JaCoCo report & Jira bug report                      |
 
 ---
@@ -220,10 +218,10 @@ A bug report was created in **Jira Software** for an issue found in the Calculat
 
 ## 👥 Group Members
 
-| Name           | Role                                    | GitHub Username |
-| -------------- | --------------------------------------- | --------------- |
-| **Ali Khan**   | Model + Presenter Testing, Setup        | `@alikhan`      |
-| **Sara Ahmed** | View Testing, Data-driven Tests, Config | `@saraahmed`    |
+| Name               |  GitHub Username |
+| -----------------  |  --------------- |
+| **Nayab Maryam**   |  `@NayabMaryam`  |
+| **Tooba Nadeem**   |  `@l232550`      |
 
 ---
 
