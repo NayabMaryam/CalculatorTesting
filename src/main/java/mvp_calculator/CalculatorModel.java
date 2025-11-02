@@ -10,6 +10,10 @@ public class CalculatorModel
 {
 	public int factorial(int n) 
 	{
+		if (n < 0) 
+		{
+	        throw new IllegalArgumentException("Factorial undefined for negative numbers");
+	    }
 		int fact = 1;
 		for (int i = 1; i <= n; i++) 
 		{
@@ -21,6 +25,9 @@ public class CalculatorModel
 
 	public double negation(double n) 
 	{
+		if(n==0)
+			return 0;
+		else
 		return (-n);
 	}
 
@@ -50,6 +57,10 @@ public class CalculatorModel
 
 	public double exponent(double num1, double num2) 
 	{
+		if (num1 < 0 && num2 != Math.floor(num2)) 
+		{
+	        throw new ArithmeticException("Cannot raise negative base to fractional power");
+	    }
 		return (Math.pow(num1, num2));
 	}
 }

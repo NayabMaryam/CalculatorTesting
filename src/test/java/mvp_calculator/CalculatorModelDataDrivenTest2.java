@@ -1,36 +1,51 @@
 package mvp_calculator;
-/*
- * @author Nayab Maryam
- */
+
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
-/**
- * Data-driven tests for CalculatorModel (exponential,factorial,negation)
- * Each test reads data from a CSV file.
- */
 class CalculatorModelDataDrivenTest2 
 {
 
-    private final CalculatorModel model = new CalculatorModel(); //we create an object of class under test
+    private final CalculatorModel model = new CalculatorModel();
 
     // ---------- Exponential Tests ----------
-    //This test will run once for every line in the CSV file.
-    @ParameterizedTest(name = "exponent({0}, {1}) = {2}") //for example: exponent(2, 3) = 8
-    @CsvFileSource(resources = "/exponent_test_data.csv", numLinesToSkip = 1) //resources: tell JUnit to look in 'src/test/resources/add_test_data.csv'. //numLinesToSkip: skip the header line (num1,num2,expected).
-    void testExponential(double num1, double num2, double expected) 
+    @ParameterizedTest(name = "exponent({0}, {1}) => {2}")
+    @CsvFileSource(resources = "/exponent_test_data.csv", numLinesToSkip = 1)
+    void testExponential(double base, double power, String expectedStr) 
     {
-        assertEquals(expected, model.exponent(num1, num2));
+        if (expectedStr.equals("EXCEPTION")) 
+        {
+            assertThrows(ArithmeticException.class, () -> model.exponent(base, power),
+                    "Expected ArithmeticException for invalid exponent input");
+        } 
+        else 
+        {
+            double expected = Double.parseDouble(expectedStr);
+            double result = model.exponent(base, power);
+            assertEquals(expected, result, 0.0001);
+        }
     }
 
     // ---------- Factorial Tests ----------
-    @ParameterizedTest(name = "factorial({0}) = {1}") 
-    @CsvFileSource(resources = "/factorial_test_data.csv", numLinesToSkip = 1) 
-    void testFactorial(int num1, int expected) 
+    @ParameterizedTest(name = "factorial({0}) => {1}")
+    @CsvFileSource(resources = "/factorial_test_data.csv", numLinesToSkip = 1)
+    void testFactorial(int n, String expectedStr) 
     {
-        assertEquals(expected, model.factorial(num1));
+        if (expectedStr.equals("EXCEPTION")) 
+        {
+            assertThrows(IllegalArgumentException.class, () -> model.factorial(n),
+                    "Expected IllegalArgumentException for negative input");
+        } 
+        else 
+        {
+            int expected = Integer.parseInt(expectedStr);
+            int result = model.factorial(n);
+            assertEquals(expected, result);
+        }
     }
+
+
 
     // ---------- Negation Tests ----------
     @ParameterizedTest(name = "negation({0}) = {1}")
