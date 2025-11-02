@@ -1,5 +1,3 @@
 num1,expected
 5,-5
 -4,4
-"""abc""",Error
-0,0

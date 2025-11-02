@@ -17,7 +17,7 @@ class CalculatorModelDataDrivenTest2
 
     // ---------- Exponential Tests ----------
     //This test will run once for every line in the CSV file.
-    @ParameterizedTest(name = "exponent({2}, {3}) = {8}") //for example: exponent(2, 3) = 8
+    @ParameterizedTest(name = "exponent({0}, {1}) = {2}") //for example: exponent(2, 3) = 8
     @CsvFileSource(resources = "/exponent_test_data.csv", numLinesToSkip = 1) //resources: tell JUnit to look in 'src/test/resources/add_test_data.csv'. //numLinesToSkip: skip the header line (num1,num2,expected).
     void testExponential(double num1, double num2, double expected) 
     {
@@ -25,7 +25,7 @@ class CalculatorModelDataDrivenTest2
     }
 
     // ---------- Factorial Tests ----------
-    @ParameterizedTest(name = "factorial({5}) = {120}") 
+    @ParameterizedTest(name = "factorial({0}) = {1}") 
     @CsvFileSource(resources = "/factorial_test_data.csv", numLinesToSkip = 1) 
     void testFactorial(int num1, int expected) 
     {
@@ -33,7 +33,7 @@ class CalculatorModelDataDrivenTest2
     }
 
     // ---------- Negation Tests ----------
-    @ParameterizedTest(name = "negation({-5}) = {5}")
+    @ParameterizedTest(name = "negation({0}) = {1}")
     @CsvFileSource(resources = "/negation_test_data.csv", numLinesToSkip = 1)
     void testNegation(double num1, double expected) 
     {
