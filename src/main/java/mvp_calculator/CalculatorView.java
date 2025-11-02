@@ -17,7 +17,7 @@ public class CalculatorView extends Frame
 {
 	private TextField txtOp1;
 	private TextField txtOp2;
-	private TextField txtRes;
+	private  TextField txtRes;
 
 	private Button addBtn, subBtn, multiplyBtn, divideBtn, exponentBtn, negationBtn, factorialBtn,zeroBtn,
 			oneBtn, twoBtn, threeBtn, fourBtn, fiveBtn, sixBtn, sevenBtn, eightBtn, nineBtn;
@@ -121,6 +121,15 @@ public class CalculatorView extends Frame
 	public String getOp2() 
 	{
 		return txtOp2.getText();
+	}
+	/**
+	 * Gets the text from the result operand to  TextField.
+	 * 
+	 * @return The result operand as a String.
+	 */
+	public String getResult() 
+	{
+	    return txtRes.getText();
 	}
 
 	/**
