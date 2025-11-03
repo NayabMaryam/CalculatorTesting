@@ -4,6 +4,7 @@
 
 This project implements **automated unit testing** for a simple Java-based calculator application with three main components:
 
+* **CalculatorApp** – To initialize the objects of other classes so they work correctly.
 * **CalculatorModel** – Performs all arithmetic operations (add, subtract, multiply, divide).
 * **CalculatorPresenter** – Acts as the logic layer that connects the View and Model.
 * **CalculatorView** – Displays calculation results and interacts with the user interface.
@@ -58,9 +59,10 @@ The purpose of this assignment is to design, implement, and execute automated te
 
 | Class               | Description                                   |
 | ------------------- | --------------------------------------------- |
-| CalculatorModel     | Core arithmetic operations                    |
-| CalculatorPresenter | Connects View and Model                       |
-| CalculatorView      | Handles user interaction (mocked for testing) |
+| CalculatorAppTest       | Connects all three classes to run without exception|
+| CalculatorModelTest     | Core arithmetic operations                    |
+| CalculatorPresenterTest | Connects View and Model                       |
+| CalculatorViewTest      | Handles user interaction (mocked for testing) |
 
 ---
 
@@ -75,14 +77,13 @@ All tests were designed using **ECP** and **BVA**:
 ### 🔹 Example Unit Test
 
 ```java
-@Test
-void testDivision_ByZero_ShouldThrowException() {
-    CalculatorModel model = new CalculatorModel();
-    assertThrows(ArithmeticException.class, () -> model.divide(10, 0));
-}
+	@Test
+	void fivePlusThreeShouldEqualEight() { // testing addition with positive number
+		assertEquals(8, model.add(5, 3)); // assertEquals(expected,actual);
+	}
 ```
 
-Each class includes **5–10 descriptive test cases**, focusing on correctness and robustness.
+Each class includes **3–11 descriptive test cases**, focusing on correctness and robustness.
 
 ---
 
@@ -90,25 +91,27 @@ Each class includes **5–10 descriptive test cases**, focusing on correctness a
 
 Data-driven testing was implemented using **CSV files** and an **Excel test sheet**.
 
-### 📁 CSV File Example (`/resources/addition_data.csv`)
+### 📁 CSV File Example (`/resources/add_data.csv`)
 
 ```
-a,b,expected
-2,3,5
--1,4,3
-0,0,0
-100,200,300
+num1,num2,expected
+5,3,8
+-4,6,2
+0,7,7
+10,-10,0
 ```
 
 ### 🧩 Example Parameterized Test
 
 ```java
-@ParameterizedTest
-@CsvFileSource(resources = "/addition_data.csv", numLinesToSkip = 1)
-void testAdditionFromCsv(int a, int b, int expected) {
-    CalculatorModel model = new CalculatorModel();
-    assertEquals(expected, model.add(a, b));
-}
+// ---------- Addition Tests ----------
+    //This test will run once for every line in the CSV file.
+    @ParameterizedTest(name = "add({0}, {1}) = {2}") //for example: add(5.0, 3.0) = 8.0
+    @CsvFileSource(resources = "/add_test_data.csv", numLinesToSkip = 1) //resources: tell JUnit to look in 'src/test/resources/add_test_data.csv'. //numLinesToSkip: skip the header line (num1,num2,expected).
+    void testAddition(double num1, double num2, double expected)
+    {
+        assertEquals(expected, model.add(num1, num2));
+    }
 ```
 
 ### 🧾 Excel Test Sheet
@@ -131,27 +134,34 @@ The file `TestCases.xlsx` includes **4 test cases per category**:
 Configured in `pom.xml`:
 
 ```xml
-<plugin>
-  <groupId>org.apache.maven.plugins</groupId>
-  <artifactId>maven-surefire-plugin</artifactId>
-  <version>3.1.2</version>
-  <configuration>
-    <parallel>classes</parallel>
-    <threadCount>3</threadCount>
-  </configuration>
-</plugin>
+<plugins>
+   <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-surefire-plugin</artifactId>
+      <version>3.0.0-M7</version>
+      <configuration>
+         <parallel>classes</parallel>
+         <threadCount>2</threadCount>
+         <useUnlimitedThreads>false</useUnlimitedThreads>
+      </configuration>
+   </plugin>
+</plugins>
 ```
 
-### 🏷️ Test Grouping with Tags
+### 🏷️ Test Grouping with order notation
 
 ```java
-@Tag("fast")
-@Test
-void testQuickAddition() { ... }
+   @Test
+	@Order(1)
+	void fivePlusThreeShouldEqualEight() { // testing addition with positive number
+		assertEquals(8, model.add(5, 3)); // assertEquals(expected,actual);
+	}
 
-@Tag("integration")
-@Test
-void testPresenterIntegration() { ... }
+	@Test
+	@Order(2)
+	void fivePlusMinusThreeShouldEqualTwo() { // testing addition with negative number
+		assertEquals(2, model.add(5, -3));
+	}
 ```
 
 Run a specific group:
@@ -163,25 +173,32 @@ mvn test -Dgroups=fast
 ### 🧩 Test Suites Example
 
 ```java
+/**
+ * Suite for fast, lightweight unit tests.
+ */
 @Suite
-@SelectClasses({CalculatorModelTest.class, CalculatorPresenterTest.class})
-public class FastTestsSuite {}
+@SelectClasses({
+    CalculatorModelTest.class,
+    CalculatorViewTest.class
+})
+public class FastTests {
+}
 ```
 
 ---
 
 ## 🧾 Summary Report
 
-| Metric                   | Description                                          |
-| ------------------------ | ---------------------------------------------------- |
-| **Test Framework**       | JUnit 5                                              |
-| **Classes Tested**       | CalculatorModel, CalculatorPresenter, CalculatorView |
-| **Test Cases per Class** | 5–10                                                 |
-| **Data Source**          | CSV + Excel                                          |
-| **Execution Type**       | Parallel (3 threads)                                 |
-| **Coverage Tool**        | JaCoCo                                               |
-| **Team Members**         | 2                                                    |
-| **Extras**               | JaCoCo report & Jira bug report                      |
+| Metric                   | Description                                                         |
+| ------------------------ | ------------------------------------------------------------------- |
+| **Test Framework**       | JUnit 5                                                             |
+| **Classes Tested**       | CalculatorApp, CalculatorModel, CalculatorPresenter, CalculatorView |
+| **Test Cases per Class** | 3–11                                                                |
+| **Data Source**          | CSV + Excel                                                         |
+| **Execution Type**       | Parallel (3 threads)                                                |
+| **Coverage Tool**        | JaCoCo                                                              |
+| **Team Members**         | 2                                                                   |
+| **Extras**               | JaCoCo report & Jira bug report                                     |
 
 ---
 
@@ -199,7 +216,24 @@ Screenshot of report attached in repository.
 ---
 
 ## 🐞 Bug Report (Question 2)
+**Bug#01**
+A bug report was created in **Jira Software** for an issue found in the Calculator app.
 
+| Field                  | Value                                                                                |
+| ---------------------- | ------------------------------------------------------------------------------------ |
+| **Project Name**       | Calculator App                                                                       |
+| **Issue Type**         | Bug                                                                                  |
+| **Summary**            | App crashes when dividing by zero                                                    |
+| **Description**        | Division by zero causes ArithmeticException instead of showing user-friendly message |
+| **Priority**           | High                                                                                 |
+| **Steps to Reproduce** | 1. Enter 10 ÷ 0 <br> 2. Press “=”                                                    |
+| **Expected Result**    | Show “Cannot divide by zero”                                                         |
+| **Actual Result**      | Show -1.0 on screen.                                                                 | 
+| **Attachment**         | `jira_bug_report.png`                                                                |
+
+---
+## 🐞 Bug Report (Question 2)
+**Bug#02**
 A bug report was created in **Jira Software** for an issue found in the Calculator app.
 
 | Field                  | Value                                                                                |
@@ -240,8 +274,7 @@ A bug report was created in **Jira Software** for an issue found in the Calculat
 ## 🧩 Attachments
 
 * `setup_demo.mp4` – project setup and execution demo
-* `TestCases.xlsx` – Excel test sheet
-* `addition_data.csv` – CSV data file
+* `addition_data.csv` – CSV data files for all operators
 * `jira_bug_report.png` – screenshot of Jira bug report
 
 ---
